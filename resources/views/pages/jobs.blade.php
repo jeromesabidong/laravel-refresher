@@ -12,6 +12,11 @@
                 </div>
             </a>
         @endforeach
+
+        <div>
+            <!-- for pagination links -->
+            {{ $jobs->links() }}
+        </div>
 </div>
 
 </x-authenticated-layout>

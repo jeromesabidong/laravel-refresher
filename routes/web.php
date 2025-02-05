@@ -40,7 +40,8 @@ Route::get('/', function() {
 
 Route::get('/jobs', function(){
     // eager loading >>> lazy loading (to avoid n+1 problem)
-    $jobs = JobListing::with('employer')->get();
+    $jobs = JobListing::with('employer')->simplePaginate(3);
+
     return view('pages.jobs', [
         'jobs' => $jobs,
     ]);
