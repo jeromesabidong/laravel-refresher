@@ -2,18 +2,18 @@
 
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
+use App\Models\JobListing;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -30,3 +30,27 @@ Route::resource('chirps', ChirpController::class)
     ->middleware(['auth']);
 
 require __DIR__.'/auth.php';
+
+// ---- 
+
+Route::get('/', function() {
+    return view('pages.home');
+});
+
+
+Route::get('/jobs', function(){
+    return view('pages.jobs', [
+        'jobs' => JobListing::all(),
+    ]);
+});
+
+Route::get('/jobs/{id}', function($id) {
+
+    $job = JobListing::find($id);
+
+    return view('pages.job', ['job' => $job]);
+});
+
+Route::get('/contact', function() {
+    return view('pages.contact');
+});
