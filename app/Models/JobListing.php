@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class JobListing extends Model
 {
-    // protected $table = 'job_listings';
     use HasFactory;
 
     protected $fillable = [ 'title', 'salary'];
@@ -15,5 +14,10 @@ class JobListing extends Model
     public function employer()
     {
         return $this->belongsTo(Employer::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }
