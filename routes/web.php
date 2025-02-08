@@ -74,6 +74,46 @@ Route::post('/jobs', function() {
     return redirect('/jobs');
 });
 
+Route::get('/jobs/{id}/edit', function($id) {
+
+    $job = JobListing::find($id);
+
+    return view('jobs.edit', ['job' => $job]);
+});
+
+Route::patch('/jobs/{id}', function($id) {
+    // validate request
+    request()->validate([
+        'title' => ['required', 'min:3'], 
+        'salary' => ['required'],
+    ]);
+
+    // authorize the request (on hold..) 
+
+    // update the job if found, otherwise abort
+    // check Route Model Binding
+    $job = JobListing::findOrFail($id);
+
+    $job->update([
+        'title' => request("title"), 
+        'salary' => request('salary'),
+    ]);
+
+    // redirect to the job page
+    return redirect('/jobs/' . $job->id);
+});
+
+Route::delete('/jobs/{id}', function($id) {
+    // authorize (on hold...)
+
+    // delete the job
+    $job = JobListing::findOrFail($id);
+    $job->delete();
+
+    // redirect
+    return redirect('/jobs');
+});
+
 Route::get('/contact', function() {
     return view('pages.contact');
 });
