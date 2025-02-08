@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobListing;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class JobListingController extends Controller
 {
     public function index()
     {
         // eager loading >>> lazy loading (to avoid n+1 problem)
-        $jobs = JobListing::with('employer')->latest()->simplePaginate(3);
+        $jobs = JobListing::with('employer')->latest()->simplePaginate(25);
     
         return view('jobs.index', [
             'jobs' => $jobs,
