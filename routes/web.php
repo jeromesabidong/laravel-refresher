@@ -3,6 +3,8 @@
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisterUserController;
+use App\Http\Controllers\SessionController;
 use App\Models\JobListing;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -49,3 +51,10 @@ Route::view('contact', 'pages.contact');
 
 // Resource controllers
 Route::resource('jobs', JobListingController::class);
+
+// Auth
+Route::get('/register', [RegisterUserController::class, 'create']);
+Route::post('/register', [RegisterUserController::class, 'store']);
+
+Route::get('/login', [SessionController::class, 'create']);
+Route::post('/login', [SessionController::class, 'store']);
