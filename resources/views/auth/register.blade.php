@@ -27,10 +27,10 @@
                     </x-form-field>
 
                     <x-form-field>
-                        <x-form-label for="email_address">Email Address</x-form-label>
+                        <x-form-label for="email">Email Address</x-form-label>
                         <div class="mt-2">
-                            <x-form-input name="email_address" id="email_address" required type='email' />
-                            <x-form-error name="email_address" />
+                            <x-form-input name="email" id="email" required type='email' />
+                            <x-form-error name="email" />
                         </div>
                     </x-form-field>
 
@@ -45,7 +45,7 @@
                     <x-form-field>
                         <x-form-label for="password_confirmation">Confirm Password</x-form-label>
                         <div class="mt-2">
-                            <x-form-input name="password_confirmation" id="password_confirmation" required type='password_confirmation' />
+                            <x-form-input name="password_confirmation" id="password_confirmation" required type='password' />
                             <x-form-error name="password_confirmation" />
                         </div>
                     </x-form-field>
