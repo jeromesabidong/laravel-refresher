@@ -5,6 +5,8 @@ use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\SessionController;
+use App\Jobs\TranslateJob;
+use App\Models\JobListing;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -34,6 +36,15 @@ use Inertia\Inertia;
 require __DIR__.'/auth.php';
 
 // ---- 
+
+Route::get('test', function() {
+
+
+    $joblisting = JobListing::first();
+    TranslateJob::dispatch($joblisting);
+
+    return 'Done';
+});
 
 Route::view('/', 'pages.home');
 Route::view('contact', 'pages.contact');
